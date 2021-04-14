@@ -1,0 +1,32 @@
+{
+  "name": "ribbon-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "nodemon index.ts",
+    "build": "tsc --project ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnovak252/ribbon-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dnovak252/ribbon-app/issues"
+  },
+  "homepage": "https://github.com/dnovak252/ribbon-app#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.37",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  }
+}

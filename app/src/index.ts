@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import { resolveSoa } from 'node:dns';
 
 const app = express();
 const PORT = 8000;
@@ -12,15 +13,22 @@ app.use(express.urlencoded({
 app.get('/', (req,res) => res.send('Hello world!'));
 
 app.get('/read', (req,res) =>{
-  var test = req.query;
+  let test = req.query;
 
   console.log(test);
 })
 
 app.post('/create', (req, res)=>{
-  var test = req.body;
+  let test = req.body;
 
   res.json(test);
+})
+
+app.put("/:id", (req, res) => {
+  let id = req.params.id;
+  res.send ({
+    message : "Update on "+ id +" successful."
+  })
 })
 
 app.delete('/delete/:id', (req,res) => {

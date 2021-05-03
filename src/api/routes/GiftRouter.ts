@@ -1,35 +1,17 @@
 import {Router} from 'express';
+import {GiftController} from "../controllers/GiftController";
 
 const giftRouter = Router();
+const giftController = new GiftController();
 
-giftRouter.get('/gifts', (req, res) =>{
-  let test = req.query;
+giftRouter.get('/all', giftController.GetGifts);
 
-  console.log(test);
-})
+giftRouter.get('/:id', giftController.GetSingleGift);
 
-giftRouter.get('/gifts/:id', (req, res) =>{
-  let test = req.query;
+giftRouter.post('/create', giftController.CreateGift);
 
-  console.log(test);
-})
+giftRouter.put("/update/:id", giftController.UpdateGift);
 
-
-giftRouter.post('/gifts/create', (req, res)=>{
-  let test = req.body;
-
-  res.json(test);
-})
-
-giftRouter.put("/gifts/:id", (req, res) => {
-  let id = req.params.id;
-  res.send ({
-    message : "Update on "+ id +" successful."
-  })
-})
-
-giftRouter.delete('/gifts/:id', (req, res) => {
-  res.send("DELETE request for " + req.params.id)
-})
+giftRouter.delete('/delete/:id', giftController.DeleteGift);
 
 export default giftRouter;

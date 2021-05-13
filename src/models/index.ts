@@ -6,4 +6,3 @@ export const sequelize = new Sequelize('ribbon', 'root', '', {
 });
 
 sequelize.authenticate();
-

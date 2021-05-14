@@ -1,8 +1,22 @@
-const { Sequelize } = require('sequelize');
+import * as sequelize from "sequelize";
+import { UserFactory } from "./UserModel";
 
-export const sequelize = new Sequelize('ribbon', 'root', '', {
-  host: 'localhost',
-  dialect: 'mysql'
-});
+export const dbConfig = new sequelize.Sequelize(
+  (process.env.DB_NAME = "ribbon"),
+  (process.env.DB_USER = "root"),
+  (process.env.DB_PASSWORD = ""),
+  {
+    port: Number(process.env.DB_PORT) || 3306,
+    host: process.env.DB_HOST || "localhost",
+    dialect: "mysql",
+    pool: {
+        min: 0,
+        max: 5,
+        acquire: 30000,
+        idle: 10000, 
+    }
+  },
+);
 
-sequelize.authenticate();
+export const User = UserFactory(dbConfig);
+

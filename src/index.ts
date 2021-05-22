@@ -4,6 +4,9 @@ import router from './api/routes/index';
 const app = express();
 const PORT = 8000;
 
+// za slike
+// app.use("uploads", express.static(""))
+
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true

@@ -1,5 +1,6 @@
 import * as sequelize from "sequelize";
 import { UserFactory } from "./UserModel";
+import { GiftFactory } from "./GiftModel";
 
 export const dbConfig = new sequelize.Sequelize(
   (process.env.DB_NAME = "ribbon"),
@@ -19,4 +20,5 @@ export const dbConfig = new sequelize.Sequelize(
 );
 
 export const User = UserFactory(dbConfig);
+export const dbGift = GiftFactory(dbConfig);
 

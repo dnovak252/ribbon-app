@@ -1,23 +1,24 @@
 import { dbGift } from "../models";
-import { Gift, GiftModel } from "../models/GiftModel";
+import { Gift, GiftModel, GiftAttributes } from "../models/GiftModel";
 
 export default class GiftService{
-  GetAllGifts = (searchTerm: string): Promise<GiftModel[]>=>{
+  GetAllGifts = (): Promise<GiftModel[]>=>{
     console.dir(Gift)
-    return dbGift.findAll({where: {Name: searchTerm}});
+    return dbGift.findAll();
   };
 
   GetGiftById = (id: string): Promise<GiftModel | null>=> {
-    return dbGift.findByPk(id)
+    return dbGift.findByPk(id);
   };
 
-  InsertGift = () => {
+  InsertGift = (gift: GiftAttributes): Promise<GiftModel> => {
+    return dbGift.create(gift);
   };
 
-  UpdateGift = () =>{
-
+  UpdateGift = (gift: GiftAttributes): Promise<GiftModel> =>{
+    return dbGift.create(gift);
   };
-
+  
   DeleteGift = () =>{
 
   };

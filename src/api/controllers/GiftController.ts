@@ -5,7 +5,7 @@ export class GiftController {
 
   private service: GiftService = new GiftService();
   GetGifts = async (req: Request, res: Response)=>{
-    const result = await this.service.GetAllGifts(req.query.searchTerm!.toString());
+    const result = await this.service.GetAllGifts();
     return res.status(200).json(result)
   }
 
@@ -17,16 +17,15 @@ export class GiftController {
     return res.status(404);
   }
 
-  CreateGift = (req: Request, res: Response)=>{
-    const test = req.body;
-    res.json(test);
+  CreateGift = async (req: Request, res: Response)=>{
+    const gift = await this.service.InsertGift(req.body);
+    res.json(gift);
   }
 
-  UpdateGift = (req: Request, res: Response)=>{
-    const id = req.params.id;
-    res.send ({
-      message : "Update on "+ id +" successful."
-    })
+  UpdateGift = async (req: Request, res: Response)=>{
+    const gift = await this.service.UpdateGift(req.body);
+    await gift.save();
+    res.json(gift);
   }
 
   DeleteGift = (req: Request, res: Response)=>{

@@ -18,7 +18,7 @@ export type GiftStatic = typeof Model & {
 export function GiftFactory (sequelize: Sequelize): GiftStatic{
   return <GiftStatic>sequelize.define("gift", {
     Id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUIDV4,
       primaryKey: true
     },
     Name: {

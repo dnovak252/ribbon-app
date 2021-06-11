@@ -15,11 +15,11 @@ export default class GiftService{
     return dbGift.create(gift);
   };
 
-  UpdateGift = (gift: GiftAttributes): Promise<GiftModel> =>{
-    return dbGift.create(gift);
+  UpdateGift = (id: string, gift: GiftAttributes): Promise<[number, GiftModel[]]> => {
+    return dbGift.update(gift, {where: {Id: id}});
   };
   
-  DeleteGift = () =>{
-
+  DeleteGift = (id: string): Promise<number> => {
+    return dbGift.destroy({where:{Id: id}});   
   };
 }

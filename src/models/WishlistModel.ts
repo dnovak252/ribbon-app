@@ -15,7 +15,7 @@ export type WishlistStatic = typeof Model & {
   new (values?: object, options?: BuildOptions): WishlistModel;
 };
 
-export function ChildFactory (sequelize: Sequelize): WishlistStatic{
+export function WishlistFactory (sequelize: Sequelize): WishlistStatic{
   return <WishlistStatic>sequelize.define("wishlist", {
     Id: {
       type: DataTypes.UUIDV4,

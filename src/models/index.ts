@@ -1,14 +1,23 @@
 import * as sequelize from "sequelize";
 import { UserFactory } from "./UserModel";
 import { GiftFactory } from "./GiftModel";
+import { ChildFactory } from "./ChildModel";
+import { WishlistFactory } from "./WishlistModel";
+require('dotenv').config();
+
+
+const DatabaseName = process.env.DB_NAME || "";
+const DatabaseUser = process.env.DB_USER || "";
+const DatabasePassword = process.env.DB_PASSWORD || "";
+const DatabaseHost = process.env.DB_HOST;
 
 export const dbConfig = new sequelize.Sequelize(
-  (process.env.DB_NAME = "ribbon"),
-  (process.env.DB_USER = "root"),
-  (process.env.DB_PASSWORD = ""),
+  (DatabaseName),
+  (DatabaseUser),
+  (DatabasePassword),
   {
     port: Number(process.env.DB_PORT) || 3306,
-    host: process.env.DB_HOST || "localhost",
+    host: DatabaseHost,
     dialect: "mysql",
     pool: {
         min: 0,
@@ -19,6 +28,8 @@ export const dbConfig = new sequelize.Sequelize(
   },
 );
 
-export const User = UserFactory(dbConfig);
+export const dbUser = UserFactory(dbConfig);
 export const dbGift = GiftFactory(dbConfig);
+export const dbChild = ChildFactory(dbConfig);
+export const dbWishlist = WishlistFactory(dbConfig);
 

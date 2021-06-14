@@ -1,5 +1,6 @@
 import express from 'express';
 import router from './api/routes/index';
+require('dotenv').config();
 
 const app = express();
 const PORT = 8000;

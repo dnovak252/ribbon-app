@@ -6,7 +6,8 @@ export interface UserAttributes {
   LastName: string,
   Email: string,
   Username: string,
-  Password: string
+  Password: string,
+  Admin: boolean
 }
 
 export interface UserModel extends Model<UserAttributes>, UserAttributes{};
@@ -17,9 +18,9 @@ export type UserStatic = typeof Model & {
 };
 
 export function UserFactory (sequelize: Sequelize): UserStatic{
-  return <UserStatic>sequelize.define("users", {
+  return <UserStatic>sequelize.define("user", {
     Id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUIDV4,
       primaryKey: true
     },
     FirstName: {
@@ -37,5 +38,8 @@ export function UserFactory (sequelize: Sequelize): UserStatic{
     Password: {
       type: DataTypes.STRING
     },
-  });
+    Admin: {
+      type: DataTypes.BOOLEAN
+    }
+  }, {timestamps: false, freezeTableName: true});
 }

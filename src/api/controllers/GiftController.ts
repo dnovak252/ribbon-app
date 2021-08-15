@@ -39,6 +39,7 @@ export class GiftController {
   };
 
   UpdateGift = async (req: Request, res: Response)=>{
+    const user = res.locals.user;
     const id = req.params.id;
     const gift = {
       Id: id,
@@ -53,11 +54,14 @@ export class GiftController {
     return res.status(404);
   }
 
-  DeleteGift = (req: Request, res: Response)=>{
+  DeleteGift = async (req: Request, res: Response)=>{
     const id = req.params.id;
-    const result = this.service.DeleteGift(id);
+    const gift = await this.service.GetGiftById(req.params.id);
+    if(!gift)
+      return res.status(404);
+
+    const result = await this.service.DeleteGift(id);
     return res.status(200).json(result);
 
-    return res.status(404);
   }
 }

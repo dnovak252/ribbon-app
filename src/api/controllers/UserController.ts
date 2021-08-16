@@ -73,11 +73,12 @@ export class UserController {
     const body = req.body;
 
     const userLogin = await this.service.GetUserByUsername(body.Username);
-
+    console.log(userLogin);
     if (userLogin) {
-      const correctPassword = null
-        ? false
-        : await bcrypt.compare(body.password, userLogin.Password);
+      const correctPassword = await bcrypt.compare(
+        body.Password,
+        userLogin.Password
+      );
       if (!correctPassword) {
         res.status(401).json({ error: "Invalid password" });
       } else {

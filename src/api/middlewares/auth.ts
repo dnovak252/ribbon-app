@@ -1,20 +1,21 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+require("dotenv").config();
+
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || "";
 
 const Auth = (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const token = req?.headers?.authorization?.split(" ")[1] || "";
-    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
-    const userId = decodedToken;
-    if (req.body.userId && req.body.userId !== userId) {
-      throw "Invalid user ID";
-    } else {
+  const authorization = req.headers.authorization;
+  if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
+    const token = authorization.split(" ")[1];
+    jwt.verify(token, ACCESS_TOKEN_SECRET, (error) => {
+      if (error) {
+        res.sendStatus(403);
+      }
       next();
-    }
-  } catch {
-    res.status(401).json({
-      error: new Error("Invalid request!"),
     });
+  } else {
+    res.sendStatus(401);
   }
 };
 

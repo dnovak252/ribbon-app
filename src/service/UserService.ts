@@ -24,33 +24,6 @@ export default class UserService {
     return dbUser.create(user);
   };
 
-  CreateUserChilder = (userId: string, children: ChildAttributes[]) => {
-    children.forEach((x) => (x.UserId = userId));
-
-    return Child.bulkCreate(children);
-  };
-
-  CreateUserWithChildren = async (
-    user: UserAttributes,
-    children: ChildAttributes[]
-  ) => {
-    const transaction = await dbConfig.transaction();
-
-    try {
-      const createdUser = await dbUser.create(user, {
-        transaction: transaction,
-      });
-
-      children.forEach((x) => (x.UserId = createdUser.Id));
-
-      await Child.bulkCreate(children, { transaction: transaction });
-
-      await transaction.commit();
-    } catch (error) {
-      transaction.rollback();
-    }
-  };
-
   UpdateUser = (
     id: string,
     user: UserAttributes

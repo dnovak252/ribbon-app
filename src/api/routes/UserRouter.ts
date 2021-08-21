@@ -9,6 +9,8 @@ userRouter.use(cors());
 
 userRouter.get("/", auth, userController.GetAllUsers);
 
+userRouter.get("/username", auth, userController.GetSingleUserByUsername);
+
 userRouter.post("/signup", userController.UserSignUp);
 
 userRouter.post("/login", userController.UserLogin);

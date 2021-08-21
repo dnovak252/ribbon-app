@@ -27,6 +27,13 @@ export class UserController {
     return res.status(404);
   };
 
+  GetSingleUserByUsername = async (req: Request, res: Response) => {
+    const result = await this.service.GetUserByUsername(req.params.id);
+    if (result) return res.status(200).json(result);
+
+    return res.status(404);
+  };
+
   UserSignUp = async (req: Request, res: Response) => {
     const userId = uuidv4();
     const saltRounds = 10;

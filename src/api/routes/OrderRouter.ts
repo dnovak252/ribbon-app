@@ -3,7 +3,6 @@ import { OrderController } from "../controllers/OrderController";
 import auth from "../middlewares/auth";
 
 const orderRouter = Router();
-orderRouter.use(auth);
 
 const orderController = new OrderController();
 

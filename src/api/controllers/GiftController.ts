@@ -29,6 +29,8 @@ export class GiftController {
       Quantity: req.body.Quantity,
       Description: req.body.Description,
       Image: req.body.Image,
+      Gender: req.body.Gender,
+      Age: req.body.Age,
     };
     const result = await this.service.InsertGift(gift);
     return res.status(200).json(result);
@@ -45,6 +47,8 @@ export class GiftController {
       Quantity: req.body.Quantity,
       Description: req.body.Description,
       Image: req.body.Image,
+      Gender: req.body.Gender,
+      Age: req.body.Age,
     };
     const result = await this.service.UpdateGift(id, gift);
     return res.status(200).json(result);

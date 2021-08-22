@@ -3,7 +3,6 @@ import { GiftController } from "../controllers/GiftController";
 import auth from "../middlewares/auth";
 
 const giftRouter = Router();
-giftRouter.use(auth);
 
 const giftController = new GiftController();
 

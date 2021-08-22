@@ -37,7 +37,7 @@ export class UserController {
   UserSignUp = async (req: Request, res: Response) => {
     const userId = uuidv4();
     const saltRounds = 10;
-    console.log(req.body.Username);
+    console.log(req.body);
     const hashPassword = await bcrypt.hash(req.body.Password, saltRounds);
 
     const usernameExists = await this.service.GetUserByUsername(

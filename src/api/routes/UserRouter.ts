@@ -7,7 +7,7 @@ const userRouter = Router();
 const userController = new UserController();
 userRouter.use(cors());
 
-userRouter.get("/", auth, userController.GetAllUsers);
+userRouter.get("/", userController.GetAllUsers);
 
 userRouter.get("/username", auth, userController.GetSingleUserByUsername);
 

@@ -3,7 +3,6 @@ import { ChildController } from "../controllers/ChildController";
 import auth from "../middlewares/auth";
 
 const childRouter = Router();
-childRouter.use(auth);
 
 const childController = new ChildController();
 

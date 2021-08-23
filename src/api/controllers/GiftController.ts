@@ -8,7 +8,11 @@ export class GiftController {
 
   GetGifts = async (req: Request, res: Response) => {
     //TODO: Dodaj query parametre za filter, paging, count od svih giftova sa tim filterom
-    const result = await this.service.GetAllGifts();
+    let filter = (req.query.filter as string) || "all";
+    let page = parseInt(req.query.page as string, 10) || 1;
+    let rpp = parseInt(req.query.rpp as string, 10) || 10;
+
+    const result = await this.service.GetAllGifts(filter, page, rpp);
     if (result) return res.status(200).json(result);
 
     return res.status(404);
